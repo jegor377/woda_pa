@@ -59,8 +59,13 @@ def main():
             desired_h.append(1.5)
         elif i * sample_period > 3000:
             desired_h.append(5.0)
+        else:
+            desired_h.append(desired_h[-1])
+        # desired_h.append(desired_h[-1])
+    plt.plot(t, desired_h)
     plt.plot(t, h)
-    plt.savefig("height.png", dpi=96 * 10)
+    # plt.savefig("height.png", dpi=96 * 10)
+    plt.show()
     plt.clf()
     plt.legend(['p', 'i', 'd'])
     plt.plot(t, p_regulations, label='p')
@@ -68,7 +73,8 @@ def main():
     plt.plot(t, d_regulations, label='d')
     # plt.plot(t, actuator_voltage, label='av')
     plt.legend()
-    plt.savefig("regulator.png", dpi=96 * 10)
+    # plt.savefig("regulator.png", dpi=96 * 10)
+    plt.show()
     print(mh, (mh - desired_h[-1]) / desired_h[-1])
 
 if __name__ == '__main__':
@@ -81,7 +87,10 @@ if __name__ == '__main__':
     max_input_quantity = 0.5 # m^3 / s
     sample_period = 0.1 # s
     simulation_time = 3600.0 # s
-    regulator_gain = 10
-    doubling_time = 7
-    lead_time = 10
+    # regulator_gain = 10
+    # doubling_time = 7
+    # lead_time = 10
+    regulator_gain = 0.5
+    doubling_time = 40
+    lead_time = 1
     main()
